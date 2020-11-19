@@ -1,10 +1,20 @@
 > # MP-0: Introduction to Docker
 
-## 环境配置
+## Goals
 
-在Windows WSL和Ubuntu下面均可成功。
+1. Inherits from the Ubuntu public image.
+2. Implements labels for a maintainer and a class.
+3. Installs python3.
+4. Creates a few environment variables.
+5. Writes to a file in the container
+6. Sets the current user to root.
+7. Runs bash whenever the container is run.
 
-首先阅读`docker`的[官方文档](https://docs.docker.com/engine/install/ubuntu/)，在Ubuntu下面安装：
+## Environment set up
+
+Installing `docker` under Ubuntu 20.04 and 16.04 is successful, but failed under WSL on windows.
+
+Firstly, read  the [official document](https://docs.docker.com/engine/install/ubuntu/) of `docker`.
 
 ```bash
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
@@ -22,12 +32,13 @@ $  sudo add-apt-repository \
    stable"
 $ sudo apt-get update
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io
-# 在WSL下面出现错误
+
+# error occurs on WSL
 $ sudo docker run hello-world
 docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.
 See 'docker run --help'.
 
-# 在Ubuntu下可以正常运行
+# run normally under ubuntu
 $ sudo docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -57,3 +68,34 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
+
+
+## Problem 1
+
+- Open up your terminal
+- Create a new directory and `cd` into it.
+- Create a file called `Dockerfile` and open it in your favorite editor.
+
+*These questions should be viewed as guiding questions, you don't need to submit answers for these*
+
+Inherit from the standard `ubuntu` image on dockerhub. (Why do we do this?)
+
+You can build and test your Dockerfile by running these commands:
+
+```
+$ docker build -t <container name> .
+```
+
+Now, you have a container named whatever you specified. Try running.
+
+```
+$ docker run -i -t <container name>
+```
+
+If you see something like:
+
+```
+root@8a788562c667:/# 
+```
+
+You've been launched into bash, and you have made your first container!
